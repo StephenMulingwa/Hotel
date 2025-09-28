@@ -1,0 +1,34 @@
+# Ignore development files
+xampp/
+htdocs/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore Git
+.git/
+.gitignore
+
+# Ignore local config
+config.local.php
+.env.local
+
+# Ignore test files
+test.php
+tests/
+
+# Ignore documentation
+README.md
+IMPLEMENTATION_SUMMARY.md
