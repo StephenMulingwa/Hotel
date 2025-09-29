@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Enable Apache modules
+RUN a2enmod rewrite headers expires
 
 # Set working directory
 WORKDIR /var/www/html
@@ -27,7 +27,8 @@ RUN mkdir -p /var/www/html/storage \
     && chmod -R 755 /var/www/html/storage
 
 # Configure Apache
-RUN echo '<Directory /var/www/html>' >> /etc/apache2/apache2.conf \
+RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf \
+    && echo '<Directory /var/www/html>' >> /etc/apache2/apache2.conf \
     && echo '    AllowOverride All' >> /etc/apache2/apache2.conf \
     && echo '</Directory>' >> /etc/apache2/apache2.conf
 
