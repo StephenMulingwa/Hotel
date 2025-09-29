@@ -9,7 +9,7 @@ if ($isProduction) {
     $databaseUrl = $_ENV['DATABASE_URL'] ?? '';
     $parsedUrl = parse_url($databaseUrl);
     
-    $config = [
+    $GLOBALS['CONFIG'] = [
         'app' => [
             'name' => 'Aurora Hotel',
             'currency' => 'KES',
@@ -30,7 +30,7 @@ if ($isProduction) {
     ];
 } else {
     // Development configuration
-    $config = [
+    $GLOBALS['CONFIG'] = [
         'app' => [
             'name' => 'Aurora Hotel',
             'currency' => 'KES',
@@ -47,4 +47,7 @@ if ($isProduction) {
     ];
 }
 
-const CONFIG = $config;
+// Create a function to access the config
+function CONFIG() {
+    return $GLOBALS['CONFIG'];
+}

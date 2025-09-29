@@ -79,7 +79,7 @@ class OrderController {
 		} else {
 			// For cash, just notify staff
 			$msg = $pdo->prepare('INSERT INTO messages (from_user_id, to_role, booking_id, room_id, body, created_at) VALUES (?, ?, ?, ?, ?, ?)');
-			$txt = 'New order #' . $orderId . ' total ' . money($total, CONFIG['app']['currency']) . ' (Cash on delivery)';
+			$txt = 'New order #' . $orderId . ' total ' . money($total, CONFIG()['app']['currency']) . ' (Cash on delivery)';
 			$msg->execute([$user['id'], 'receptionist', $booking['id'] ?? null, $booking['room_id'] ?? null, $txt, now()]);
 			$msg->execute([$user['id'], 'kitchen', $booking['id'] ?? null, $booking['room_id'] ?? null, $txt, now()]);
 		}
@@ -143,7 +143,7 @@ class OrderController {
 			
 			// Notify staff
 			$msg = $pdo->prepare('INSERT INTO messages (from_user_id, to_role, booking_id, room_id, body, created_at) VALUES (?, ?, ?, ?, ?, ?)');
-			$txt = 'Order #' . $orderId . ' paid via M-Pesa - ' . money($orderData['total_cents'], CONFIG['app']['currency']);
+			$txt = 'Order #' . $orderId . ' paid via M-Pesa - ' . money($orderData['total_cents'], CONFIG()['app']['currency']);
 			$msg->execute([$user['id'], 'receptionist', $orderData['booking_id'], $orderData['room_id'], $txt, now()]);
 			$msg->execute([$user['id'], 'kitchen', $orderData['booking_id'], $orderData['room_id'], $txt, now()]);
 		}

@@ -19,8 +19,8 @@ class ReceptionController {
 			'rooms' => $rooms,
 			'date' => $date,
 			'occupancy' => $occupancy,
-			'currency' => CONFIG['app']['currency'],
-			'pricePerNight' => (int)CONFIG['payments']['room_price_per_night'],
+			'currency' => CONFIG()['app']['currency'],
+			'pricePerNight' => (int)CONFIG()['payments']['room_price_per_night'],
 		], 'Reception');
 	}
 
@@ -61,9 +61,9 @@ class ReceptionController {
 		$bookingId = (int)$pdo->lastInsertId();
 
 		$nights = max(1, (int)(new \DateTimeImmutable($start))->diff(new \DateTimeImmutable($end))->format('%a'));
-		$amount = $nights * (int)CONFIG['payments']['room_price_per_night'];
+		$amount = $nights * (int)CONFIG()['payments']['room_price_per_night'];
 		$insP = $pdo->prepare("INSERT INTO payments (booking_id, amount_cents, currency, method, status, paid_at, created_at) VALUES (?, ?, ?, 'card', 'paid', ?, ?)");
-		$insP->execute([$bookingId, $amount, CONFIG['app']['currency'], now(), now()]);
+		$insP->execute([$bookingId, $amount, CONFIG()['app']['currency'], now(), now()]);
 
 		redirect('/reception?ok=1');
 	}

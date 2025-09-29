@@ -10,7 +10,7 @@ class KitchenController {
 		$oi = $pdo->query('SELECT oi.*, m.name FROM order_items oi JOIN menu_items m ON m.id=oi.menu_item_id')->fetchAll();
 		$orderItems = [];
 		foreach ($oi as $row) { $orderItems[$row['order_id']][] = $row; }
-		render('kitchen/index', ['items' => $items, 'orders' => $orders, 'orderItems' => $orderItems, 'currency' => CONFIG['app']['currency']], 'Kitchen');
+		render('kitchen/index', ['items' => $items, 'orders' => $orders, 'orderItems' => $orderItems, 'currency' => CONFIG()['app']['currency']], 'Kitchen');
 	}
 
 	public function createItem(): void {
@@ -42,7 +42,7 @@ class KitchenController {
 		$oi = $pdo->query('SELECT oi.*, m.name FROM order_items oi JOIN menu_items m ON m.id=oi.menu_item_id')->fetchAll();
 		$orderItems = [];
 		foreach ($oi as $row) { $orderItems[$row['order_id']][] = $row; }
-		render('kitchen/enhanced', ['items' => $items, 'orders' => $orders, 'orderItems' => $orderItems, 'currency' => CONFIG['app']['currency']], 'Enhanced Kitchen');
+		render('kitchen/enhanced', ['items' => $items, 'orders' => $orders, 'orderItems' => $orderItems, 'currency' => CONFIG()['app']['currency']], 'Enhanced Kitchen');
 	}
 
 	public function uploadImage(): void {

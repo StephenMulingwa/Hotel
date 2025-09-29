@@ -6,7 +6,8 @@ require_once dirname(__DIR__) . '/bootstrap.php';
 $pdo = db();
 
 // Check if we're using PostgreSQL (production) or SQLite (development)
-$isPostgreSQL = CONFIG['database']['driver'] === 'pgsql';
+$config = CONFIG();
+$isPostgreSQL = $config['database']['driver'] === 'pgsql';
 
 if ($isPostgreSQL) {
     // PostgreSQL setup

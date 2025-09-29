@@ -40,7 +40,8 @@ function db(): PDO {
 		return $pdo;
 	}
 	
-	$dbConfig = CONFIG['database'];
+	$config = CONFIG();
+	$dbConfig = $config['database'];
 	
 	if ($dbConfig['driver'] === 'pgsql') {
 		// PostgreSQL connection for production
@@ -53,7 +54,7 @@ function db(): PDO {
 		$pdo = new PDO($dsn, $dbConfig['user'], $dbConfig['password']);
 	} else {
 		// SQLite connection for development
-		$databaseFile = STORAGE_PATH . '/' . (CONFIG['database']['sqlite_file'] ?? 'database.sqlite');
+		$databaseFile = STORAGE_PATH . '/' . ($config['database']['sqlite_file'] ?? 'database.sqlite');
 		$dsn = 'sqlite:' . $databaseFile;
 		$pdo = new PDO($dsn);
 	}

@@ -1,7 +1,7 @@
 <div class="py-16">
     <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-4xl font-bold mb-4">
-            Welcome to <?php echo htmlspecialchars(CONFIG['app']['name']); ?>
+            Welcome to <?php echo htmlspecialchars(CONFIG()['app']['name']); ?>
         </h1>
         <p class="text-gray-600 mb-8">
             Book rooms, order from the live menu, and chat with our team. 

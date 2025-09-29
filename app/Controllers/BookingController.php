@@ -197,7 +197,7 @@ class BookingController {
 		$stmt->execute([$bookingId, currentUser()['id']]);
 		$data = $stmt->fetch();
 		if (!$data) { http_response_code(404); echo 'Booking not found'; return; }
-		render('booking/pay', ['b' => $data, 'currency' => CONFIG['app']['currency']], 'Payment');
+		render('booking/pay', ['b' => $data, 'currency' => CONFIG()['app']['currency']], 'Payment');
 	}
 
 	public function pay(): void {
