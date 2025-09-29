@@ -409,4 +409,55 @@ class AdminController {
 		
 		render('admin/customer-edit', ['customer' => $customerData], 'Edit Customer');
 	}
+
+	public function kitchenOverview(): void {
+		requireRole(['admin']);
+		$pdo = db();
+		
+		// Get all orders with customer and room information
+		$orders = $pdo->query("
+			SELECT o.*, u.name as customer_name, r.number as room_number,
+			       COUNT(oi.id) as item_count
+			FROM orders o 
+			LEFT JOIN users u ON u.id = o.user_id 
+			LEFT JOIN rooms r ON r.id = o.room_id 
+			LEFT JOIN order_items oi ON oi.order_id = o.id
+			GROUP BY o.id
+			ORDER BY o.created_at DESC
+		")->fetchAll();
+		
+		// Get order items for each order
+		$orderItems = [];
+		foreach ($orders as $order) {
+			$items = $pdo->prepare("
+				SELECT oi.*, mi.name as item_name, mi.description, mi.image_url
+				FROM order_items oi
+				LEFT JOIN menu_items mi ON mi.id = oi.menu_item_id
+				WHERE oi.order_id = ?
+			");
+			$items->execute([$order['id']]);
+			$orderItems[$order['id']] = $items->fetchAll();
+		}
+		
+		// Get menu items
+		$menuItems = $pdo->query("
+			SELECT * FROM menu_items 
+			ORDER BY category, name
+		")->fetchAll();
+		
+		// Get kitchen stats
+		$stats = [
+			'total_orders' => $pdo->query("SELECT COUNT(*) as count FROM orders")->fetch()['count'],
+			'pending_orders' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'pending'")->fetch()['count'],
+			'preparing_orders' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'preparing'")->fetch()['count'],
+			'delivered_today' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'delivered' AND DATE(created_at) = CURDATE()")->fetch()['count'],
+		];
+		
+		render('admin/kitchen-overview', [
+			'orders' => $orders,
+			'orderItems' => $orderItems,
+			'menuItems' => $menuItems,
+			'stats' => $stats
+		], 'Kitchen Overview');
+	}
 }

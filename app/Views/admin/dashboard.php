@@ -64,7 +64,7 @@ $title = 'Admin Dashboard - ' . ($settings['hotel_name'] ?? 'Hotel');
         <!-- Quick Access Menu -->
         <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">Admin Quick Access</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 <a href="/admin/customers" class="flex items-center space-x-3 p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
                     <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
                         <i class="fas fa-user-friends"></i>
@@ -81,6 +81,15 @@ $title = 'Admin Dashboard - ' . ($settings['hotel_name'] ?? 'Hotel');
                     <div>
                         <p class="font-medium text-gray-900">Chat Overview</p>
                         <p class="text-sm text-gray-500">Monitor chats</p>
+                    </div>
+                </a>
+                <a href="/admin/kitchen" class="flex items-center space-x-3 p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
+                    <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Kitchen Overview</p>
+                        <p class="text-sm text-gray-500">Live kitchen monitoring</p>
                     </div>
                 </a>
                 <a href="/admin/settings" class="flex items-center space-x-3 p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">

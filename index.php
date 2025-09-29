@@ -76,6 +76,7 @@ $routes = [
         '/admin/customers/{id}' => [AdminController::class, 'customerDetails'],
         '/admin/customers/{id}/edit' => [AdminController::class, 'editCustomer'],
         '/admin/chat' => [AdminController::class, 'chatOverview'],
+        '/admin/kitchen' => [AdminController::class, 'kitchenOverview'],
         
         // Receipt routes
         '/receipt/generate' => [ReceiptController::class, 'generate'],
