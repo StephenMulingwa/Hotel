@@ -446,11 +446,12 @@ class AdminController {
 		")->fetchAll();
 		
 		// Get kitchen stats
+		$today = date('Y-m-d');
 		$stats = [
 			'total_orders' => $pdo->query("SELECT COUNT(*) as count FROM orders")->fetch()['count'],
 			'pending_orders' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'pending'")->fetch()['count'],
 			'preparing_orders' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'preparing'")->fetch()['count'],
-			'delivered_today' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'delivered' AND DATE(created_at) = CURDATE()")->fetch()['count'],
+			'delivered_today' => $pdo->query("SELECT COUNT(*) as count FROM orders WHERE status = 'delivered' AND date(created_at) = '$today'")->fetch()['count'],
 		];
 		
 		render('admin/kitchen-overview', [

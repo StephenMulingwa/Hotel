@@ -123,8 +123,8 @@ $title = 'Customer Management - ' . ($settings['hotel_name'] ?? 'Hotel');
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($customer['phone']) ?></div>
-                                    <div class="text-sm text-gray-500"><?= htmlspecialchars($customer['email']) ?></div>
+                                    <div class="text-sm text-gray-900"><?= htmlspecialchars($customer['phone'] ?? '') ?></div>
+                                    <div class="text-sm text-gray-500"><?= htmlspecialchars($customer['email'] ?? '') ?></div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
