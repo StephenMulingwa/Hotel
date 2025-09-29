@@ -1,18 +1,10 @@
 services:
   - type: web
     name: hotel-management
-    env: php
+    env: docker
     plan: free
-    buildCommand: |
-      # Install PHP dependencies if any
-      echo "Building PHP application..."
-      # No build step needed for pure PHP
-    startCommand: |
-      # Start PHP built-in server
-      php -S 0.0.0.0:$PORT -t .
+    dockerfilePath: ./Dockerfile
     envVars:
-      - key: PHP_VERSION
-        value: 8.1
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
