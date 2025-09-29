@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS chat_messages (
 -- Menu items table
 CREATE TABLE IF NOT EXISTS menu_items (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     description TEXT,
     price_cents INTEGER NOT NULL,
     image_url VARCHAR(500),
@@ -173,4 +173,4 @@ INSERT INTO menu_items (name, description, price_cents, is_available) VALUES
 ('Vegetable Curry', 'Mixed vegetables in creamy coconut curry', 120000, true),
 ('Fresh Juice', 'Assorted fresh fruit juices', 50000, true),
 ('Coffee', 'Freshly brewed coffee', 30000, true)
-ON CONFLICT DO NOTHING;
+ON CONFLICT (name) DO NOTHING;

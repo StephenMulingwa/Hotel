@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS payments (
 );
 
 CREATE TABLE IF NOT EXISTS menu_items (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	name TEXT NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
 	description TEXT,
 	price_cents INTEGER NOT NULL,
 	category TEXT NOT NULL DEFAULT 'dish' CHECK(category IN ('dish','drink')),
@@ -275,10 +275,15 @@ SQL;
         ['Coffee', 'Freshly brewed coffee', 15000, 'drink', 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400'],
         ['Pizza Margherita', 'Classic Italian pizza', 180000, 'dish', 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400'],
     ];
-    $mStmt = $pdo->prepare('INSERT INTO menu_items (name, description, price_cents, category, image_url, in_stock, created_at) VALUES (?, ?, ?, ?, ?, 1, ?)');
     foreach ($menu as $m) {
         [$name, $desc, $price, $category, $image] = $m;
-        $mStmt->execute([$name, $desc, $price, $category, $image, now()]);
+        // Upsert-like behavior for SQLite: try update first, then insert if none updated
+        $upd = $pdo->prepare('UPDATE menu_items SET description = ?, price_cents = ?, category = ?, image_url = ?, in_stock = 1 WHERE name = ?');
+        $upd->execute([$desc, $price, $category, $image, $name]);
+        if ($upd->rowCount() === 0) {
+            $ins = $pdo->prepare('INSERT INTO menu_items (name, description, price_cents, category, image_url, in_stock, created_at) VALUES (?, ?, ?, ?, ?, 1, ?)');
+            $ins->execute([$name, $desc, $price, $category, $image, now()]);
+        }
     }
 
     echo '<pre>SQLite database setup complete!</pre>';
