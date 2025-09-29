@@ -4,6 +4,9 @@ declare(strict_types=1);
 // Check if we're in production (Render)
 $isProduction = isset($_ENV['RENDER']) || (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'onrender.com') !== false);
 
+// Temporarily use SQLite for testing (remove this after setting up PostgreSQL)
+$isProduction = false;
+
 if ($isProduction) {
     // Production configuration for Render
     $databaseUrl = $_ENV['DATABASE_URL'] ?? '';
