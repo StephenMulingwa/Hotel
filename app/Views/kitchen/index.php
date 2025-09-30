@@ -1,54 +1,9 @@
-<?php
-$title = 'Kitchen Dashboard - ' . ($settings['hotel_name'] ?? 'Hotel');
-?>
+<script>
+	// Auto-refresh every 30 seconds
+	setTimeout(function() { location.reload(); }, 30000);
+</script>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title) ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        // Auto-refresh every 30 seconds
-        setTimeout(function() {
-            location.reload();
-        }, 30000);
-    </script>
-</head>
-<body class="bg-gray-100">
-    <!-- Header -->
-    <div class="bg-white shadow-sm border-b">
-        <div class="flex items-center justify-between p-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
-                    <i class="fas fa-utensils"></i>
-                </div>
-                <div>
-                    <h1 class="font-semibold text-gray-900">Kitchen Dashboard</h1>
-                    <p class="text-sm text-gray-500">Manage food orders and menu items</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-2">
-                <div class="text-sm text-gray-500">
-                    <i class="fas fa-sync-alt mr-1"></i>
-                    Auto-refresh: 30s
-                </div>
-                <a href="/admin" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                    <i class="fas fa-home"></i>
-                </a>
-                <form method="POST" action="/logout" class="inline">
-                    <input type="hidden" name="_token" value="<?= csrf_token() ?>">
-                    <button type="submit" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="p-6">
+<div class="p-6">
         <!-- Stats Overview -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
@@ -275,5 +230,3 @@ $title = 'Kitchen Dashboard - ' . ($settings['hotel_name'] ?? 'Hotel');
             </div>
         </div>
     </div>
-</body>
-</html>

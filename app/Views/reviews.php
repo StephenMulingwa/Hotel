@@ -1,16 +1,4 @@
-<?php
-$title = 'Reviews - ' . ($settings['hotel_name'] ?? 'Hotel');
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title) ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
+<style>
         .review-card {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
@@ -39,33 +27,6 @@ $title = 'Reviews - ' . ($settings['hotel_name'] ?? 'Hotel');
             color: #fbbf24;
         }
     </style>
-</head>
-<body class="bg-gray-100">
-    <!-- Header -->
-    <div class="bg-white shadow-sm border-b">
-        <div class="flex items-center justify-between p-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-semibold">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div>
-                    <h1 class="font-semibold text-gray-900">Hotel Reviews</h1>
-                    <p class="text-sm text-gray-500"><?= htmlspecialchars($settings['hotel_name'] ?? 'Hotel') ?> Guest Reviews</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-2">
-                <a href="/dashboard" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <form method="POST" action="/logout" class="inline">
-                    <input type="hidden" name="_token" value="<?= csrf_token() ?>">
-                    <button type="submit" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <div class="p-6">
         <!-- Review Statistics -->
@@ -279,5 +240,3 @@ $title = 'Reviews - ' . ($settings['hotel_name'] ?? 'Hotel');
             });
         });
     </script>
-</body>
-</html>
