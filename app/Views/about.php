@@ -1,59 +1,14 @@
-<?php
-$title = 'About Us - ' . ($settings['hotel_name'] ?? 'Hotel');
-?>
+<style>
+    .hero-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .feature-card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .amenity-icon {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+</style>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title) ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .feature-card {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        .amenity-icon {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
-    <!-- Header -->
-    <div class="bg-white shadow-sm border-b">
-        <div class="flex items-center justify-between p-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                    <i class="fas fa-hotel"></i>
-                </div>
-                <div>
-                    <h1 class="font-semibold text-gray-900"><?= htmlspecialchars($settings['hotel_name'] ?? 'Hotel') ?></h1>
-                    <p class="text-sm text-gray-500">About Our Hotel</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-2">
-                <a href="/" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                    <i class="fas fa-home"></i>
-                </a>
-                <a href="/login" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                    <i class="fas fa-sign-in-alt"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
+<!-- Hero Section -->
     <div class="hero-section text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
@@ -261,13 +216,4 @@ $title = 'About Us - ' . ($settings['hotel_name'] ?? 'Hotel');
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="bg-gray-800 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p class="text-gray-400">&copy; 2024 <?= htmlspecialchars($settings['hotel_name'] ?? 'Hotel') ?>. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+<!-- End About Content -->

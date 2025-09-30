@@ -1,18 +1,9 @@
 <?php
-$title = 'Chat - ' . ($settings['hotel_name'] ?? 'Hotel');
 $user = currentUser();
 $isCustomer = $user['role'] === 'customer';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title) ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
+<style>
         .chat-container {
             height: calc(100vh - 80px);
         }
@@ -46,51 +37,6 @@ $isCustomer = $user['role'] === 'customer';
             border: 2px solid white;
         }
     </style>
-</head>
-<body class="bg-gray-100">
-    <!-- Header -->
-    <div class="bg-white shadow-sm border-b">
-        <div class="flex items-center justify-between p-4">
-            <div class="flex items-center space-x-3">
-                <a href="/dashboard" class="text-gray-600 hover:text-gray-800">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        <?php if ($isCustomer): ?>
-                            <i class="fas fa-headset"></i>
-                        <?php else: ?>
-                            <i class="fas fa-user"></i>
-                        <?php endif; ?>
-                    </div>
-                    <div>
-                        <h1 class="font-semibold text-gray-900">
-                            <?php if ($isCustomer): ?>
-                                Hotel Support
-                            <?php else: ?>
-                                Customer Chat
-                            <?php endif; ?>
-                        </h1>
-                        <p class="text-sm text-gray-500">
-                            <?php if ($isCustomer): ?>
-                                We're here to help
-                            <?php else: ?>
-                                Manage customer conversations
-                            <?php endif; ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-center space-x-2">
-                <button id="refreshBtn" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                    <i class="fas fa-sync-alt"></i>
-                </button>
-                <button id="settingsBtn" class="p-2 text-gray-600 hover:text-gray-800 rounded-full hover:bg-gray-100">
-                    <i class="fas fa-cog"></i>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <div class="flex chat-container">
         <!-- Sidebar - Conversations List -->
@@ -411,5 +357,3 @@ $isCustomer = $user['role'] === 'customer';
             return div.innerHTML;
         }
     </script>
-</body>
-</html>
